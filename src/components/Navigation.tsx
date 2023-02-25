@@ -4,7 +4,7 @@ function Navigation() {
   return (
     <>
         <CssBaseline />
-        <AppBar color='transparent'>
+        <AppBar color='default'>
             <Toolbar>
                 <Stack spacing={3} direction='row'>
                 <Link href="/" variant="h5" underline='none' >Student Management</Link>

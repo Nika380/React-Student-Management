@@ -1,4 +1,4 @@
-import { Box, Stack, TextField, Button } from '@mui/material';
+import { Box, Stack, TextField, Button, Link } from '@mui/material';
 import React, { useState } from 'react'
 
 function AddTeacher() {
@@ -44,8 +44,8 @@ function AddTeacher() {
         <TextField  onChange={(e) => setBirthDate(e.target.value)} type='date'></TextField>
     </Stack>
     <Stack spacing={6} direction='row' marginTop="20px" marginLeft="20%">
-        <Button variant='contained' color='success' onClick={saveTeacherInfo}>Submit</Button>
-        <Button variant='contained' color='error'>Cancel</Button>
+        <Link href='/teacher-management'><Button variant='contained' color='success' onClick={saveTeacherInfo}>Submit</Button></Link>
+        <Link href='/teacher-management' underline='none'><Button variant='contained' color='error'>Cancel</Button></Link>
     </Stack>
     </Box>
   )

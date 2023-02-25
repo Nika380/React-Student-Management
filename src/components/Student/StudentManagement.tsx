@@ -1,9 +1,10 @@
-import { Typography, Table, TableHead, TableBody, TableRow, TableCell,Box, ButtonGroup, Button } from '@mui/material'
+import { Typography, Table, TableHead, TableBody, TableRow, TableCell,Box, ButtonGroup, Button, TextField, Stack } from '@mui/material'
 import { useState, useEffect} from 'react'
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Link } from '@mui/material';
 import StudentList from './StudentList';
+import FilterUi from '../FilterUi';
 
 function StudentManagement() {
 
@@ -15,6 +16,8 @@ function StudentManagement() {
     
     <Box marginTop='100px' width='80%' marginLeft="100px">
     <Link href='/add-student' underline='none'><Button size='medium' variant='contained'> <Typography> Add Student </Typography> </Button></Link>
+    <FilterUi />
+    <Typography variant='h3' margin="20px 0 20px 40%">Student List</Typography>
     <Table>
         <TableHead>
             <TableRow>

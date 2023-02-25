@@ -1,7 +1,12 @@
-import { Box, Button, ButtonGroup, Link, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
+import { Box, Button, ButtonGroup,  Table, TableBody, TableCell, TableHead, TableRow, Typography, Tabs, Tab } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useState, useEffect } from 'react';
+import StudentList from '../Student/StudentList';
+import { Stack } from '@mui/system';
+import StudentsInGroups from './StudentsInGroups';
+import TeachersInGroups from './TeachersInGroups';
+import {Link} from 'react-router-dom';
 
 function GroupManagement() {
   const [groups, setGroups] = useState<{ id: number; groupName: string; }[]>([]);
@@ -31,29 +36,42 @@ function GroupManagement() {
           }
         }
     
+        const [selectedTab, setSelectedTab] = useState('students');
 
+        function handleTabChange(event: React.SyntheticEvent, newValue: string) {
+        
+          setSelectedTab(newValue);
+          console.log(selectedTab);
+        }
 
   return (
     
-    <Box marginTop='100px' width='80%' marginLeft="100px">
-    <Link href='/add-student' underline='none'><Button size='medium' variant='contained'> <Typography> Add Student </Typography> </Button></Link>
-    <Table>
-        <TableHead>
-            <TableRow>
+    <Box marginTop='100px' width='80%' marginLeft="100px" position='relative'>
+    <Link to='/create-group' style={{textDecoration: 'none'}}><Button size='medium' variant='contained'> <Typography> Create New Group </Typography> </Button></Link>
+        {groups.map(group => {
+          return (
+          <Box width='100%' justifyContent='center'  sx={{border: 1, borderColor: "secondary.main", borderRadius: '10px'}} margin="20px auto" position='relative' display="inline-block">
+                <Link to={`/update-group/${group.id}`} style={{textDecoration: 'none', margin:"30px"}}> <Button variant='outlined'>Edit Data</Button> </Link>
 
-                <TableCell> <Typography fontSize='24px' align='right'> id </Typography> </TableCell>
-                <TableCell> <Typography fontSize='24px' align='right'> Firstname </Typography> </TableCell>
-                <TableCell> <Typography fontSize='24px' align='right'> Lastname </Typography> </TableCell>
-                <TableCell> <Typography fontSize='24px' align='right'> Private Number </Typography> </TableCell>
-                <TableCell> <Typography fontSize='24px' align='right'> Email </Typography> </TableCell>
-                <TableCell> <Typography fontSize='24px' align='right'> Birthdate </Typography> </TableCell>
-                <TableCell> <Typography fontSize='24px' align='right'> Edit/Delete </Typography> </TableCell>
-            </TableRow>
-        </TableHead>
-        <TableBody>
-          
-        </TableBody>
-    </Table>
+            
+            <Table>
+            <TableHead key={group.id}>
+                <TableCell> <Typography fontSize='24px' align='right'>Group id: {group.id} </Typography> </TableCell>
+                <TableCell> <Typography fontSize='24px' align='right'>Group Name: {group.groupName} </Typography> </TableCell>
+            </TableHead>
+            <TableBody>
+                <Tabs textColor='primary' value={selectedTab} onChange={handleTabChange}>
+                  <Tab value="students" label="Students" />
+                  <Tab value="teachers" label="Teachers" />
+                </Tabs>
+                <Box marginLeft="40%" width="100%">
+                  {selectedTab === 'students' ? <StudentsInGroups groupId={group.id}/> : <TeachersInGroups groupId={group.id}/>}
+                </Box>
+              </TableBody>
+          </Table>
+          </Box>
+          )
+        })}
     </Box>
   )
 }

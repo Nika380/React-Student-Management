@@ -1,4 +1,4 @@
-import {Box, Button,Stack, TextField } from '@mui/material'
+import {Box, Button,Stack, TextField, Link } from '@mui/material'
 import { useState } from 'react'
 
 
@@ -27,7 +27,7 @@ function AddStudent() {
           })
           .then(response => response.json())
           .then(data => {
-            console.log('Success:', data);
+            alert("Student Added To Database");
           })
           .catch((error) => {
             console.error('Error:', error);
@@ -45,8 +45,8 @@ function AddStudent() {
         <TextField  onChange={(e) => setBirthDate(e.target.value)} type='date'></TextField>
     </Stack>
     <Stack spacing={6} direction='row' marginTop="20px" marginLeft="20%">
-        <Button variant='contained' color='success' onClick={saveStudentInfo}>Submit</Button>
-        <Button variant='contained' color='error'>Cancel</Button>
+        <Link href='/'><Button variant='contained' color='success' onClick={saveStudentInfo}>Submit</Button></Link>
+        <Link href='/' underline='none'><Button variant='contained' color='error'>Cancel</Button></Link>
     </Stack>
     </Box>
   )
